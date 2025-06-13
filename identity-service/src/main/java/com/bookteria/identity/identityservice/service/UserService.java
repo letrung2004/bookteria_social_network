@@ -1,6 +1,7 @@
 package com.bookteria.identity.identityservice.service;
 
 import com.bookteria.identity.identityservice.constant.PredefinedRole;
+import com.bookteria.identity.identityservice.dto.request.ProfileCreationRequest;
 import com.bookteria.identity.identityservice.dto.request.UserCreationRequest;
 import com.bookteria.identity.identityservice.dto.request.UserUpdateRequest;
 import com.bookteria.identity.identityservice.dto.response.UserResponse;
@@ -8,9 +9,12 @@ import com.bookteria.identity.identityservice.entity.Role;
 import com.bookteria.identity.identityservice.entity.User;
 import com.bookteria.identity.identityservice.exception.AppException;
 import com.bookteria.identity.identityservice.exception.ErrorCode;
+import com.bookteria.identity.identityservice.mapper.ProfileMapper;
 import com.bookteria.identity.identityservice.mapper.UserMapper;
 import com.bookteria.identity.identityservice.repository.RoleRepository;
 import com.bookteria.identity.identityservice.repository.UserRepository;
+import com.bookteria.identity.identityservice.repository.httpclient.ProfileClient;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -33,6 +37,8 @@ public class UserService {
     RoleRepository roleRepository;
     UserMapper userMapper;
     PasswordEncoder passwordEncoder;
+    ProfileClient profileClient;
+    ProfileMapper profileMapper;
 
     public UserResponse createUser(UserCreationRequest request) {
         if (userRepository.existsByUsername(request.getUsername())) throw new AppException(ErrorCode.USER_EXISTED);
@@ -44,8 +50,14 @@ public class UserService {
         roleRepository.findById(PredefinedRole.USER_ROLE).ifPresent(roles::add);
 
         user.setRoles(roles);
+        user = userRepository.save(user);
 
-        return userMapper.toUserResponse(userRepository.save(user));
+
+        var profileRequest = profileMapper.toProfileCreationRequest(request);
+        profileRequest.setUserId(user.getId());
+        profileClient.createProfile(profileRequest); // tạo user profile
+
+        return userMapper.toUserResponse(user);
     }
 
     public UserResponse getMyInfo() {

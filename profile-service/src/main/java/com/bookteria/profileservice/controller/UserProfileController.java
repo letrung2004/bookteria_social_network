@@ -1,5 +1,6 @@
 package com.bookteria.profileservice.controller;
 
+import com.bookteria.profileservice.dto.ApiResponse;
 import com.bookteria.profileservice.dto.response.UserProfileResponse;
 import com.bookteria.profileservice.service.UserProfileService;
 import lombok.AccessLevel;
@@ -16,11 +17,15 @@ public class UserProfileController {
     UserProfileService userProfileService;
 
     @GetMapping("/users/{profileId}")
-    UserProfileResponse getProfile(@PathVariable String profileId) {
-        return userProfileService.getUserProfileById(profileId);
+    ApiResponse<UserProfileResponse> getProfile(@PathVariable String profileId) {
+        return ApiResponse.<UserProfileResponse>builder()
+                .result(userProfileService.getUserProfileById(profileId))
+                .build();
     }
     @GetMapping("/users")
-    List<UserProfileResponse> getAllProfiles() {
-        return userProfileService.getAllUserProfiles();
+   ApiResponse<List<UserProfileResponse>> getAllProfiles() {
+        return ApiResponse.<List<UserProfileResponse>>builder()
+                .result(userProfileService.getAllUserProfiles())
+                .build();
     }
 }

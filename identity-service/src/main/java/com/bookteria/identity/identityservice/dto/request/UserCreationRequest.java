@@ -1,10 +1,11 @@
 package com.bookteria.identity.identityservice.dto.request;
 
-
 import java.time.LocalDate;
 
-import com.bookteria.identity.identityservice.validator.DobConstraint;
 import jakarta.validation.constraints.Size;
+
+import com.bookteria.identity.identityservice.validator.DobConstraint;
+
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -25,5 +26,6 @@ public class UserCreationRequest {
 
     @DobConstraint(min = 10, message = "INVALID_DOB")
     LocalDate dob;
+
     String city;
 }

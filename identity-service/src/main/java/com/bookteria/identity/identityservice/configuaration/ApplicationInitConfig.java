@@ -1,22 +1,24 @@
 package com.bookteria.identity.identityservice.configuaration;
 
-import com.bookteria.identity.identityservice.constant.PredefinedRole;
-import com.bookteria.identity.identityservice.entity.Role;
-import com.bookteria.identity.identityservice.entity.User;
-import com.bookteria.identity.identityservice.repository.RoleRepository;
-import com.bookteria.identity.identityservice.repository.UserRepository;
-import lombok.AccessLevel;
-import lombok.RequiredArgsConstructor;
-import lombok.experimental.FieldDefaults;
-import lombok.experimental.NonFinal;
-import lombok.extern.slf4j.Slf4j;
+import java.util.HashSet;
+
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.HashSet;
+import com.bookteria.identity.identityservice.constant.PredefinedRole;
+import com.bookteria.identity.identityservice.entity.Role;
+import com.bookteria.identity.identityservice.entity.User;
+import com.bookteria.identity.identityservice.repository.RoleRepository;
+import com.bookteria.identity.identityservice.repository.UserRepository;
+
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
+import lombok.experimental.NonFinal;
+import lombok.extern.slf4j.Slf4j;
 
 @Configuration
 @RequiredArgsConstructor

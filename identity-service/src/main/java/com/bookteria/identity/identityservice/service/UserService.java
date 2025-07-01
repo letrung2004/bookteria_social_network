@@ -1,7 +1,14 @@
 package com.bookteria.identity.identityservice.service;
 
+import java.util.HashSet;
+import java.util.List;
+
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
 import com.bookteria.identity.identityservice.constant.PredefinedRole;
-import com.bookteria.identity.identityservice.dto.request.ProfileCreationRequest;
 import com.bookteria.identity.identityservice.dto.request.UserCreationRequest;
 import com.bookteria.identity.identityservice.dto.request.UserUpdateRequest;
 import com.bookteria.identity.identityservice.dto.response.UserResponse;
@@ -14,21 +21,11 @@ import com.bookteria.identity.identityservice.mapper.UserMapper;
 import com.bookteria.identity.identityservice.repository.RoleRepository;
 import com.bookteria.identity.identityservice.repository.UserRepository;
 import com.bookteria.identity.identityservice.repository.httpclient.ProfileClient;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-
-import java.util.HashSet;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -54,10 +51,8 @@ public class UserService {
         user.setRoles(roles);
         user = userRepository.save(user);
 
-
         var profileRequest = profileMapper.toProfileCreationRequest(request);
         profileRequest.setUserId(user.getId());
-
 
         profileClient.createProfile(profileRequest); // tạo user profile
 

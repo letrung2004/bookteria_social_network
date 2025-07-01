@@ -1,16 +1,17 @@
 package com.bookteria.identity.identityservice.configuaration;
 
-import com.bookteria.identity.identityservice.dto.request.ApiResponse;
-import com.bookteria.identity.identityservice.exception.ErrorCode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.servlet.ServletException;
+import java.io.IOException;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import org.springframework.http.MediaType;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
-import java.io.IOException;
+import com.bookteria.identity.identityservice.dto.request.ApiResponse;
+import com.bookteria.identity.identityservice.exception.ErrorCode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override

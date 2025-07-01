@@ -1,18 +1,21 @@
 package com.bookteria.identity.identityservice.controller;
 
+import java.util.List;
+
+import jakarta.validation.Valid;
+
+import org.springframework.web.bind.annotation.*;
+
 import com.bookteria.identity.identityservice.dto.request.ApiResponse;
 import com.bookteria.identity.identityservice.dto.request.UserCreationRequest;
 import com.bookteria.identity.identityservice.dto.request.UserUpdateRequest;
 import com.bookteria.identity.identityservice.dto.response.UserResponse;
 import com.bookteria.identity.identityservice.service.UserService;
-import jakarta.validation.Valid;
+
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/users")

@@ -1,6 +1,5 @@
 package com.bookteria.identity.identityservice.dto.response;
 
-import java.time.LocalDate;
 import java.util.Set;
 
 import lombok.*;

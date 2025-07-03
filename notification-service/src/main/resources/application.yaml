@@ -8,7 +8,7 @@ spring:
     name: notification-service
   data:
     mongodb:
-      uri:  mongodb://root:root@localhost:27017/notification-service?authSource=admin
+      uri:  ${MONGODB_CONNECTION}
   kafka:
     bootstrap-servers: localhost:9094
     consumer:
@@ -16,3 +16,6 @@ spring:
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+email:
+  api-key: ${API_KEY}

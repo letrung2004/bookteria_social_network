@@ -20,7 +20,8 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class EmailService {
     EmailClient emailClient;
-    String apiKey = "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";
+
+    String apiKey = System.getenv("EMAIL_API_KEY");
 
     public EmailResponse setEmail(SendEmailRequest request) {
         EmailRequest emailRequest = EmailRequest.builder()

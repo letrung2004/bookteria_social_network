@@ -1,7 +1,6 @@
 package com.bookteria.notificationservice.controller;
 
 import com.bookteria.notificationservice.dto.ApiResponse;
-import com.bookteria.notificationservice.dto.request.EmailRequest;
 import com.bookteria.notificationservice.dto.request.SendEmailRequest;
 import com.bookteria.notificationservice.dto.response.EmailResponse;
 import com.bookteria.notificationservice.service.EmailService;
@@ -9,7 +8,6 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
